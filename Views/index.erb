@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BoneSpy | Upload X-ray</title>
+
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    header {
+      background-color: #000;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #444;
+    }
+
+    h2, h3 {
+      color: #03a9f4;
+      font-weight: 600;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      flex: 1;
+    }
+
+    .container {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .upload-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .upload-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      width: 520px;         
+      min-height: 160px;     
+
+      padding: 32px;
+      box-sizing: border-box;
+
+      border: 2px dashed #555;
+      border-radius: 14px;
+      background-color: #1a1a1a;
+    }
+
+    .upload-box:hover {
+      border-color: #03a9f4;
+      background-color: #202020;
+    }
+
+    .upload-title {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .upload-sub {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .about-section {
+      max-width: 900px;
+      margin: 60px auto 80px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .about-section p,
+    .about-section li {
+      color: #ddd;
+    }
+
+    .about-section ul {
+      margin-left: 20px;
+    }
+
+    #before-after {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 120px auto 0 auto;
+      max-width: 900px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    #before-after img {
+      max-width: 350px;
+      border-radius: 10px;
+      border: 1px solid #444;
+    }
+
+    @media (max-width: 768px) {
+      #before-after {
+        flex-direction: column;
+      }
+
+    .upload-box {
+      width: 50%;
+      max-width: px;
+    }
+    }
+
+    footer {
+      margin-top: 120px;
+      padding: 20px 0;
+      background-color: #000;
+      border-top: 1px solid #333;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    footer span {
+      color: #03a9f4;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">BoneSpy</div>
+</header>
+
+<div class="container">
+
+  <h2 style="margin-bottom: 20px;">Upload an X-ray</h2>
+
+  <div class="upload-wrapper">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label class="upload-box">
+        <input type="file" name="file" accept="image/*" hidden onchange="this.form.submit()">
+        <p class="upload-title"><strong>Click to upload</strong></p>
+        <p class="upload-sub">X-ray image (PNG, JPG)</p>
+      </label>
+    </form>
+  </div>
+
+  <% if @message %>
+    <p><%= @message %></p>
+  <% end %>
+
+</div>
+
+<div class="about-section">
+  <h2>About BoneSpy</h2>
+
+  <p>
+    BoneSpy is an AI-assisted orthopedic templating system designed to automate
+    implant sizing and alignment directly from standard X-ray imaging.
+  </p>
+
+  <h3>Current Status</h3>
+  <ul>
+    <li>AP X-ray analysis validated</li>
+    <li>Templating overlays demonstrated visually</li>
+    <li>Inference pipeline under active development</li>
+  </ul>
+
+  <h3>Next Steps</h3>
+  <ul>
+    <li>Lateral X-ray integration</li>
+    <li>Multi-view alignment</li>
+    <li>Parametric implant sizing</li>
+  </ul>
+</div>
+
+<div id="before-after">
+  <div>
+    <h3>Original X-ray</h3>
+    <img src="/Original.png">
+  </div>
+
+  <div>
+    <h3>Templated X-ray</h3>
+    <img src="/templated.png">
+  </div>
+</div>
+
+<script>
+  const target = document.getElementById("before-after");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        target.style.opacity = "1";
+        target.style.transform = "translateY(0)";
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(target);
+</script>
+
+<footer>
+  © 2025 <span>BoneSpy</span> — AI-assisted orthopedic templating demo
+</footer>
+
+</body>
+</html>
