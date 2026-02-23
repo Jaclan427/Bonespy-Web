@@ -1,11 +1,10 @@
-
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'fileutils'
 require 'open3'
 
-# 🔥 REQUIRED FOR NGROK / TUNNELS (SINATRA 4)
 set :bind, '0.0.0.0'
+set :port, ENV['PORT'] || 4567
 
 set :host_authorization, {
   permitted_hosts: [],
