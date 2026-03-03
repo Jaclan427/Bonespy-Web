@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h2>AP Knee Analysis</h2>
+
+        <form id="uploadForm">
+            <input type="file" name="file" required>
+            <br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        <p id="loading" style="display:none;">Processing image...</p>
+
+        <div id="results" style="display:none;">
+            <img id="resultImage" class="result-image">
+            <div id="meta"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById("uploadForm").onsubmit = async function(e){
+    e.preventDefault();
+
+    document.getElementById("loading").style.display = "block";
+
+    const formData = new FormData(this);
+
+    const response = await fetch("/predict/ap", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    document.getElementById("loading").style.display = "none";
+
+    if(data.success){
+        document.getElementById("resultImage").src =
+            data.output_image + "?t=" + Date.now();
+
+        document.getElementById("meta").innerHTML =
+            "<p><strong>Tibia:</strong> " +
+            data.meta.tibia_size_min + " - " +
+            data.meta.tibia_size_max + "</p>" +
+
+            "<p><strong>Femur:</strong> " +
+            data.meta.femur_size_min + " - " +
+            data.meta.femur_size_max + "</p>";
+
+        document.getElementById("results").style.display = "block";
+    } else {
+        alert("Error: " + data.error);
+    }
+};
+</script>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0e1117;
+    color: #e6edf3;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.nav a {
+    color: #9ca3af;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.2s ease;
+}
+
+.nav a:hover {
+    color: #ffffff;
+}
+
+.hero {
+    text-align: center;
+    padding: 120px 20px 80px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+}
+
+.button-primary {
+    background: #2563eb;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.button-primary:hover {
+    background: #1d4ed8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: #111827;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #1f2937;
+}
+
+input[type="file"] {
+    margin: 20px 0;
+    color: white;
+}
+
+button {
+    background: #2563eb;
+    border: none;
+    padding: 12px 24px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.result-image {
+    margin-top: 40px;
+    max-width: 100%;
+    border-radius: 6px;
+    border: 1px solid #1f2937;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 14px;
+}
